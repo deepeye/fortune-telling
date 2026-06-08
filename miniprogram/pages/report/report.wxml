@@ -1,0 +1,116 @@
+<view class="container">
+  <view class="report-content" wx:if="{{profile}}">
+    <text class="section-title">命盘详解</text>
+
+    <view class="pillars-section">
+      <text class="section-subtitle">四柱八字</text>
+      <view class="pillars-table">
+        <view class="pillar-row header-row">
+          <text class="pillar-cell"></text>
+          <text class="pillar-cell">年柱</text>
+          <text class="pillar-cell">月柱</text>
+          <text class="pillar-cell">日柱</text>
+          <text class="pillar-cell">时柱</text>
+        </view>
+        <view class="pillar-row">
+          <text class="pillar-cell label-cell">天干</text>
+          <text class="pillar-cell">{{profile.yearPillar.stem}}</text>
+          <text class="pillar-cell">{{profile.monthPillar.stem}}</text>
+          <text class="pillar-cell">{{profile.dayPillar.stem}}</text>
+          <text class="pillar-cell">{{profile.hourPillar.stem}}</text>
+        </view>
+        <view class="pillar-row">
+          <text class="pillar-cell label-cell">地支</text>
+          <text class="pillar-cell">{{profile.yearPillar.branch}}</text>
+          <text class="pillar-cell">{{profile.monthPillar.branch}}</text>
+          <text class="pillar-cell">{{profile.dayPillar.branch}}</text>
+          <text class="pillar-cell">{{profile.hourPillar.branch}}</text>
+        </view>
+        <view class="pillar-row">
+          <text class="pillar-cell label-cell">五行</text>
+          <text class="pillar-cell element-cell">{{pillarElements.year}}</text>
+          <text class="pillar-cell element-cell">{{pillarElements.month}}</text>
+          <text class="pillar-cell element-cell">{{pillarElements.day}}</text>
+          <text class="pillar-cell element-cell">{{pillarElements.hour}}</text>
+        </view>
+      </view>
+      <text class="estimated-note" wx:if="{{profile.isHourEstimated}}">时辰为估算，结果仅供参考</text>
+    </view>
+
+    <view class="distribution-section">
+      <text class="section-subtitle">五行分布</text>
+      <view class="distribution-bars">
+        <view class="bar-row" wx:for="{{distributionList}}" wx:key="element">
+          <text class="bar-label">{{item.element}}</text>
+          <view class="bar-track">
+            <view class="bar-fill" style="width: {{item.percent}}%; background-color: {{item.color}};"></view>
+          </view>
+          <text class="bar-count">{{item.count}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="trend-section">
+      <text class="section-subtitle">三年运势趋势</text>
+      <view class="trend-table">
+        <view class="trend-row header-row">
+          <text class="trend-cell"></text>
+          <text class="trend-cell" wx:for="{{trend}}" wx:key="year">{{item.year}}</text>
+        </view>
+        <view class="trend-row">
+          <text class="trend-cell label-cell">事业</text>
+          <text class="trend-cell" wx:for="{{trend}}" wx:key="year">{{item.scores.career}}星</text>
+        </view>
+        <view class="trend-row">
+          <text class="trend-cell label-cell">财运</text>
+          <text class="trend-cell" wx:for="{{trend}}" wx:key="year">{{item.scores.wealth}}星</text>
+        </view>
+        <view class="trend-row">
+          <text class="trend-cell label-cell">健康</text>
+          <text class="trend-cell" wx:for="{{trend}}" wx:key="year">{{item.scores.health}}星</text>
+        </view>
+        <view class="trend-row">
+          <text class="trend-cell label-cell">感情</text>
+          <text class="trend-cell" wx:for="{{trend}}" wx:key="year">{{item.scores.love}}星</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="lucky-section">
+      <text class="section-subtitle">开运建议</text>
+      <view class="lucky-card">
+        <view class="lucky-row">
+          <text class="lucky-label">幸运颜色</text>
+          <text class="lucky-value">{{lucky.colors.join('、')}}</text>
+        </view>
+        <view class="lucky-row">
+          <text class="lucky-label">幸运方位</text>
+          <text class="lucky-value">{{lucky.direction}}</text>
+        </view>
+        <view class="lucky-row">
+          <text class="lucky-label">幸运数字</text>
+          <text class="lucky-value">{{lucky.number}}</text>
+        </view>
+      </view>
+    </view>
+
+    <text class="day-master-label">日主五行：{{profile.dayMaster}}</text>
+
+    <view class="ai-section">
+      <text class="section-subtitle">深度解读</text>
+
+      <view class="ai-dimension" wx:for="{{aiDimensions}}" wx:key="name">
+        <text class="ai-dim-title">{{item.label}}</text>
+        <view class="ai-loading" wx:if="{{item.loading}}">
+          <view class="ink-spread">
+            <view class="ink-dot ink-dot-1"></view>
+            <view class="ink-dot ink-dot-2"></view>
+            <view class="ink-dot ink-dot-3"></view>
+          </view>
+          <text class="loading-text">墨韵渐显...</text>
+        </view>
+        <text class="ai-text" wx:if="{{!item.loading}}">{{item.text}}</text>
+      </view>
+    </view>
+  </view>
+</view>

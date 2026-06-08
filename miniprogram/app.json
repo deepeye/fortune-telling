@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/fortune/fortune",
+    "pages/report/report",
+    "pages/settings/settings",
+    "pages/settings/privacy"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#f5f0e8",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "知命",
+    "backgroundColor": "#f5f0e8",
+    "backgroundTextStyle": "light"
+  },
+  "cloud": true,
+  "lazyCodeLoading": "requiredComponents"
+}

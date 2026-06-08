@@ -1,0 +1,6 @@
+<view class="container">
+  <view class="policy-section" wx:for="{{sections}}" wx:key="title">
+    <text class="section-title">{{item.title}}</text>
+    <text class="section-content">{{item.content}}</text>
+  </view>
+</view>

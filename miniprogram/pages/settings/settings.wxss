@@ -1,0 +1,70 @@
+.container {
+  padding: 40rpx 30rpx;
+  min-height: 100vh;
+  background-color: #f5f0e8;
+}
+
+.section-title {
+  font-size: 32rpx;
+  color: #2c2c2c;
+  display: block;
+  text-align: center;
+  margin-bottom: 30rpx;
+  letter-spacing: 8rpx;
+}
+
+.setting-card {
+  background-color: #faf7f0;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.danger-card {
+  border: 1rpx solid #ef5350;
+}
+
+.setting-label {
+  font-size: 28rpx;
+  color: #2c2c2c;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.danger-label {
+  color: #ef5350;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setting-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.danger-desc {
+  color: #ef5350;
+}
+
+.setting-btn {
+  padding: 12rpx 24rpx;
+  background-color: #8b7355;
+  border-radius: 8rpx;
+}
+
+.danger-btn {
+  background-color: #ef5350;
+}
+
+.btn-text {
+  font-size: 24rpx;
+  color: #f5f0e8;
+}
+
+.danger-text {
+  color: #fff;
+}

@@ -1,0 +1,10 @@
+{
+  "name": "computeProfile",
+  "version": "1.0.0",
+  "description": "Compute BaZi profile and store in cloud database",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "lunar-javascript": "^1.6.12"
+  }
+}

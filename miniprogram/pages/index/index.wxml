@@ -1,0 +1,51 @@
+<view class="container">
+  <view class="header">
+    <text class="title">知命</text>
+    <text class="subtitle">输入您的出生信息，开始测算</text>
+  </view>
+
+  <view class="calendar-type-switch">
+    <text class="switch-label">历法</text>
+    <view class="switch-tabs">
+      <view class="tab {{calendarType === 'solar' ? 'tab-active' : ''}}" bindtap="switchToSolar">公历</view>
+      <view class="tab {{calendarType === 'lunar' ? 'tab-active' : ''}}" bindtap="switchToLunar">农历</view>
+    </view>
+  </view>
+
+  <view class="form-section" wx:if="{{calendarType === 'solar'}}">
+    <view class="form-item">
+      <text class="form-label">出生日期</text>
+      <picker mode="date" value="{{birthDate}}" start="1940-01-01" end="2025-12-31" bindchange="onDateChange">
+        <view class="picker-value">{{birthDate || '请选择日期'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="form-section" wx:if="{{calendarType === 'lunar'}}">
+    <view class="form-item">
+      <text class="form-label">农历日期</text>
+      <picker mode="date" value="{{lunarDateDisplay}}" start="1940-01-01" end="2025-12-31" bindchange="onLunarDateChange">
+        <view class="picker-value">{{lunarDateDisplay || '请选择日期'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="form-item">
+      <text class="form-label">出生时辰</text>
+      <picker range="{{shichenList}}" value="{{birthHourIndex}}" bindchange="onShichenChange">
+        <view class="picker-value">{{birthHourDisplay || '请选择时辰'}}</view>
+      </picker>
+    </view>
+
+    <view class="uncertain-row">
+      <text class="uncertain-label">时辰不确定？</text>
+      <switch checked="{{birthHourUncertain}}" bindchange="onUncertainChange" color="#8b7355"/>
+      <text class="uncertain-hint" wx:if="{{birthHourUncertain}}">将默认以子时推算</text>
+    </view>
+  </view>
+
+  <view class="submit-btn" bindtap="onSubmit">
+    <text class="submit-text">开始测算</text>
+  </view>
+</view>

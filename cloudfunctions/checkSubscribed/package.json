@@ -1,0 +1,9 @@
+{
+  "name": "checkSubscribed",
+  "version": "1.0.0",
+  "description": "查询用户订阅推送状态",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
