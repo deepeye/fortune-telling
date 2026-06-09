@@ -74,30 +74,57 @@ Page({
   },
 
   async loadAIContent() {
-    const dimensions = this.data.aiDimensions
+    const promises = this.data.aiDimensions.map((dim, i) =>
+      this.loadDimension(dim, i)
+    )
+    await Promise.all(promises)
+  },
 
-    for (let i = 0; i < dimensions.length; i++) {
+  async loadDimension(dim, index) {
+    try {
+      // Check cached content first
+      const cached = await this.getCachedContent(dim.name)
+      if (cached) {
+        this.updateAIDimension(index, false, cached)
+        return
+      }
+
+      // Generate fresh content via cloud function (with 1 retry)
+      const text = await this.generateWithRetry(dim.name)
+      this.updateAIDimension(index, false, text)
+    } catch (e) {
+      this.updateAIDimension(index, false, '解读内容暂时无法生成，请稍后重试。')
+    }
+  },
+
+  async generateWithRetry(dimension) {
+    const maxRetries = 1
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
-        // Check cached content first
-        const cached = await this.getCachedContent(dimensions[i].name)
-        if (cached) {
-          this.updateAIDimension(i, false, cached)
-        } else {
-          // Generate fresh content via cloud function
-          const res = await wx.cloud.callFunction({
-            name: 'generateAIContent',
-            data: {
-              dimension: dimensions[i].name,
-            },
-            timeout: 60000,
-          })
+        const res = await wx.cloud.callFunction({
+          name: 'generateAIContent',
+          data: { dimension },
+          timeout: 60000,
+        })
 
-          this.updateAIDimension(i, false, res.result.text)
+        if (res.result.text && !res.result.error) {
+          return res.result.text
+        }
+
+        // API returned but with error — retry once
+        if (attempt < maxRetries) {
+          await new Promise(r => setTimeout(r, 2000))
+          continue
         }
       } catch (e) {
-        this.updateAIDimension(i, false, '解读内容暂时无法生成，请稍后重试。')
+        // Cloud function call itself failed — retry once
+        if (attempt < maxRetries) {
+          await new Promise(r => setTimeout(r, 2000))
+          continue
+        }
       }
     }
+    throw new Error('All attempts failed')
   },
 
   async getCachedContent(dimension) {

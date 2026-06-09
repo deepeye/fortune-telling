@@ -58,9 +58,11 @@ exports.main = async (event, context) => {
 
     return { dimension, text: parsed.text }
   } catch (e) {
+    console.error('[generateAIContent] Qwen API failed:', e.response?.status, e.response?.data || e.message)
     return {
       dimension,
       text: '解读内容暂时无法生成，请稍后重试。',
+      error: e.response?.data?.error?.message || e.message,
     }
   }
 }
