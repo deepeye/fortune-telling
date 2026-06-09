@@ -1,15 +1,60 @@
+/* 新中式主题 — 知命 */
+/* 字体: 思源宋体 / 宋体 */
+/* 色系: 米白底 #f5f0e8, 水墨棕 #8b7355, 深色字 #2c2c2c */
+
+/* ========== 全局 ========== */
+.page-fortune {
+  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "宋体", serif;
+}
+
 .container {
   padding: 40rpx 30rpx;
   min-height: 100vh;
   background-color: #f5f0e8;
+  position: relative;
 }
 
+/* ========== 祥云装饰 ========== */
+.cloud-decor {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  width: 160rpx;
+  height: 80rpx;
+  opacity: 0.15;
+}
+
+.cloud-decor::before,
+.cloud-decor::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background-color: #8b7355;
+}
+
+.cloud-decor::before {
+  width: 60rpx;
+  height: 40rpx;
+  top: 20rpx;
+  left: 30rpx;
+}
+
+.cloud-decor::after {
+  width: 50rpx;
+  height: 30rpx;
+  top: 30rpx;
+  left: 80rpx;
+}
+
+/* ========== 标题 ========== */
 .section-title {
   font-size: 36rpx;
   color: #2c2c2c;
   display: block;
   margin-bottom: 30rpx;
   letter-spacing: 8rpx;
+  font-family: "Source Han Serif SC", "宋体", serif;
+  animation: fadeIn 600ms ease-out both;
 }
 
 .header-row {
@@ -27,19 +72,24 @@
   color: #8b7355;
 }
 
+/* ========== 运势提示 ========== */
 .fortune-tip {
   background-color: #faf7f0;
   padding: 24rpx;
   border-radius: 12rpx;
   margin-bottom: 30rpx;
   text-align: center;
+  border-left: 4rpx solid #8b7355;
+  animation: slideUp 400ms ease-out 100ms both;
 }
 
 .tip-text {
   font-size: 28rpx;
   color: #8b7355;
+  font-family: "Source Han Serif SC", "宋体", serif;
 }
 
+/* ========== 四维运势 ========== */
 .dimensions {
   display: flex;
   justify-content: space-between;
@@ -53,13 +103,20 @@
   background-color: #faf7f0;
   border-radius: 12rpx;
   margin: 0 8rpx;
+  animation: slideUp 400ms ease-out both;
 }
+
+.dimension-card:nth-child(1) { animation-delay: 200ms; }
+.dimension-card:nth-child(2) { animation-delay: 300ms; }
+.dimension-card:nth-child(3) { animation-delay: 400ms; }
+.dimension-card:nth-child(4) { animation-delay: 500ms; }
 
 .dimension-label {
   font-size: 26rpx;
   color: #8b7355;
   display: block;
   margin-bottom: 12rpx;
+  font-family: "Source Han Serif SC", "宋体", serif;
 }
 
 .stars {
@@ -67,8 +124,10 @@
   color: #2c2c2c;
 }
 
+/* ========== 深度解读 ========== */
 .preview-section {
   margin-top: 20rpx;
+  animation: fadeIn 600ms ease-out 300ms both;
 }
 
 .preview-card {
@@ -76,18 +135,18 @@
   padding: 24rpx;
   border-radius: 12rpx;
   margin-bottom: 16rpx;
+  transition: background-color 200ms ease;
 }
 
-.preview-blurred {
-  filter: blur(4px);
-  overflow: hidden;
-  position: relative;
+.preview-card:active {
+  background-color: #f0e8d5;
 }
 
 .preview-title {
   font-size: 28rpx;
   color: #2c2c2c;
   display: block;
+  font-family: "Source Han Serif SC", "宋体", serif;
 }
 
 .preview-content {
@@ -99,25 +158,10 @@
   color: #666;
 }
 
-.preview-lock {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  filter: none;
-}
-
-.lock-text {
-  font-size: 26rpx;
-  color: #8b7355;
-  background-color: #faf7f0;
-  padding: 16rpx 32rpx;
-  border-radius: 8rpx;
-  border: 1rpx solid #8b7355;
-}
-
+/* ========== 命盘 ========== */
 .pillars-section {
   margin-top: 20rpx;
+  animation: fadeIn 600ms ease-out 500ms both;
 }
 
 .section-subtitle {
@@ -126,6 +170,8 @@
   display: block;
   text-align: center;
   margin-bottom: 20rpx;
+  font-family: "Source Han Serif SC", "宋体", serif;
+  letter-spacing: 4rpx;
 }
 
 .pillars-table {
@@ -141,7 +187,7 @@
 }
 
 .header-row {
-  border-bottom: 1rpx solid #8b7355;
+  border-bottom: 1rpx solid #d4c5a9;
 }
 
 .pillar-cell {
@@ -149,6 +195,7 @@
   text-align: center;
   font-size: 28rpx;
   color: #2c2c2c;
+  font-family: "Source Han Serif SC", "宋体", serif;
 }
 
 .label-cell {
@@ -163,9 +210,41 @@
   margin-top: 16rpx;
 }
 
+/* ========== 分享 + 空态 ========== */
+.share-section {
+  margin-top: 30rpx;
+  text-align: center;
+  animation: fadeIn 600ms ease-out 600ms both;
+}
+
+.share-btn {
+  padding: 24rpx;
+  background-color: #8b7355;
+  border-radius: 12rpx;
+  display: inline-block;
+  transition: opacity 200ms ease;
+}
+
+.share-btn:active {
+  opacity: 0.8;
+}
+
+.share-text {
+  font-size: 28rpx;
+  color: #f5f0e8;
+  font-family: "Source Han Serif SC", "宋体", serif;
+}
+
+.poster-canvas {
+  position: fixed;
+  left: -9999px;
+  top: -9999px;
+}
+
 .empty-state {
   text-align: center;
   padding-top: 100rpx;
+  animation: fadeIn 600ms ease-out both;
 }
 
 .empty-text {
@@ -185,56 +264,22 @@
 .go-input-text {
   font-size: 28rpx;
   color: #f5f0e8;
+  font-family: "Source Han Serif SC", "宋体", serif;
 }
 
-.share-section {
-  margin-top: 30rpx;
-  text-align: center;
+/* ========== 动画定义 ========== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.share-btn {
-  padding: 24rpx;
-  background-color: #8b7355;
-  border-radius: 12rpx;
-  display: inline-block;
-}
-
-.share-text {
-  font-size: 28rpx;
-  color: #f5f0e8;
-}
-
-.poster-canvas {
-  position: fixed;
-  left: -9999px;
-  top: -9999px;
-}
-
-.subscribe-section {
-  margin-top: 20rpx;
-  text-align: center;
-}
-
-.subscribe-btn {
-  padding: 20rpx;
-  background-color: #8b7355;
-  border-radius: 12rpx;
-  display: inline-block;
-}
-
-.subscribe-text {
-  font-size: 26rpx;
-  color: #f5f0e8;
-}
-
-.subscribe-hint {
-  font-size: 24rpx;
-  color: #999;
-  display: block;
-  margin-top: 8rpx;
-}
-
-.subscribed-text {
-  font-size: 26rpx;
-  color: #8b7355;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

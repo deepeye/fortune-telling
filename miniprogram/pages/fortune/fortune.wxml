@@ -1,4 +1,6 @@
 <view class="container">
+  <view class="cloud-decor"></view>
+
   <view class="fortune-section" wx:if="{{profile}}">
     <view class="header-row">
       <text class="section-title">今日运势</text>
