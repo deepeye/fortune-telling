@@ -33,43 +33,31 @@
     <view class="preview-section">
       <text class="section-subtitle">深度解读</text>
 
-      <view class="preview-card {{hasPaidReport ? '' : 'preview-blurred'}}" bindtap="onPreviewTap">
+      <view class="preview-card" bindtap="onPreviewTap">
         <text class="preview-title">事业运解读</text>
-        <view class="preview-content" wx:if="{{hasPaidReport}}">
+        <view class="preview-content">
           <text class="preview-text">完整事业运分析</text>
         </view>
-        <view class="preview-lock" wx:if="{{!hasPaidReport}}">
-          <text class="lock-text">解锁完整解读 ¥9.9</text>
-        </view>
       </view>
 
-      <view class="preview-card {{hasPaidReport ? '' : 'preview-blurred'}}" bindtap="onPreviewTap">
+      <view class="preview-card" bindtap="onPreviewTap">
         <text class="preview-title">财运解读</text>
-        <view class="preview-content" wx:if="{{hasPaidReport}}">
+        <view class="preview-content">
           <text class="preview-text">完整财运分析</text>
         </view>
-        <view class="preview-lock" wx:if="{{!hasPaidReport}}">
-          <text class="lock-text">解锁完整解读 ¥9.9</text>
-        </view>
       </view>
 
-      <view class="preview-card {{hasPaidReport ? '' : 'preview-blurred'}}" bindtap="onPreviewTap">
+      <view class="preview-card" bindtap="onPreviewTap">
         <text class="preview-title">健康运解读</text>
-        <view class="preview-content" wx:if="{{hasPaidReport}}">
+        <view class="preview-content">
           <text class="preview-text">完整健康运分析</text>
         </view>
-        <view class="preview-lock" wx:if="{{!hasPaidReport}}">
-          <text class="lock-text">解锁完整解读 ¥9.9</text>
-        </view>
       </view>
 
-      <view class="preview-card {{hasPaidReport ? '' : 'preview-blurred'}}" bindtap="onPreviewTap">
+      <view class="preview-card" bindtap="onPreviewTap">
         <text class="preview-title">感情运解读</text>
-        <view class="preview-content" wx:if="{{hasPaidReport}}">
+        <view class="preview-content">
           <text class="preview-text">完整感情运分析</text>
-        </view>
-        <view class="preview-lock" wx:if="{{!hasPaidReport}}">
-          <text class="lock-text">解锁完整解读 ¥9.9</text>
         </view>
       </view>
     </view>
@@ -108,17 +96,6 @@
       <view class="share-btn" bindtap="onShare">
         <text class="share-text">分享运势海报</text>
       </view>
-    </view>
-
-    <view class="subscribe-section" wx:if="{{!isSubscribed}}">
-      <view class="subscribe-btn" bindtap="onSubscribe">
-        <text class="subscribe-text">订阅每日运势提醒</text>
-      </view>
-      <text class="subscribe-hint">每天为您推送运势概览</text>
-    </view>
-
-    <view class="subscribe-section" wx:if="{{isSubscribed}}">
-      <text class="subscribed-text">已订阅每日运势提醒</text>
     </view>
   </view>
 

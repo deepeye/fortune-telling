@@ -1,5 +1,6 @@
 const { computeDailyFortune } = require('../../utils/bazi-engine')
 const { preparePosterContent } = require('../../utils/poster-service')
+const { isFreeMode } = require('../../utils/app-config')
 
 function starsDisplay(score) {
   return '★'.repeat(score) + '☆'.repeat(5 - score)
@@ -11,7 +12,6 @@ Page({
     fortune: null,
     stars: null,
     hasPaidReport: false,
-    isSubscribed: false,
   },
 
   async onLoad() {
@@ -20,14 +20,12 @@ Page({
       const today = this.getToday()
       const fortune = computeDailyFortune(profile, today)
 
-      const hasPaidReport = await this.checkPaidStatus()
-      const isSubscribed = await this.checkSubscribedStatus()
+      const hasPaidReport = isFreeMode() ? true : await this.checkPaidStatus()
 
       this.setData({
         profile,
         fortune,
         hasPaidReport,
-        isSubscribed,
         stars: {
           career: starsDisplay(fortune.career),
           wealth: starsDisplay(fortune.wealth),
@@ -50,47 +48,8 @@ Page({
     }
   },
 
-  async checkSubscribedStatus() {
-    try {
-      const res = await wx.cloud.callFunction({
-        name: 'checkSubscribed',
-        data: {},
-      })
-      return res.result.isSubscribed
-    } catch (e) {
-      return false
-    }
-  },
-
   onPreviewTap() {
-    if (this.data.hasPaidReport) {
-      wx.navigateTo({ url: '/pages/report/report' })
-      return
-    }
-
-    this.requestPayment()
-  },
-
-  async requestPayment() {
-    try {
-      const createRes = await wx.cloud.callFunction({
-        name: 'createOrder',
-        data: { reportType: 'bazi_report' },
-      })
-
-      const payment = createRes.result.payment
-
-      await wx.requestPayment(payment)
-
-      this.setData({ hasPaidReport: true })
-      wx.navigateTo({ url: '/pages/report/report' })
-    } catch (e) {
-      if (e.errMsg && e.errMsg.includes('cancel')) {
-        wx.showToast({ title: '已取消支付', icon: 'none' })
-      } else {
-        wx.showToast({ title: '支付失败', icon: 'none' })
-      }
-    }
+    wx.navigateTo({ url: '/pages/report/report' })
   },
 
   getToday() {
@@ -107,25 +66,6 @@ Page({
 
   goToSettings() {
     wx.navigateTo({ url: '/pages/settings/settings' })
-  },
-
-  async onSubscribe() {
-    try {
-      const subscribeRes = await wx.requestSubscribeMessage({
-        tmplIds: ['TEMPLATE_ID_DAILY_FORTUNE'],
-      })
-
-      if (subscribeRes['TEMPLATE_ID_DAILY_FORTUNE'] === 'accept') {
-        const res = await wx.cloud.callFunction({
-          name: 'subscribePush',
-          data: {},
-        })
-        this.setData({ isSubscribed: true })
-        wx.showToast({ title: '订阅成功', icon: 'success' })
-      }
-    } catch (e) {
-      wx.showToast({ title: '订阅失败', icon: 'none' })
-    }
   },
 
   onShare() {
