@@ -42,7 +42,7 @@ Page({
         name: 'checkPaid',
         data: { reportType: 'bazi_report' },
       })
-      return res.result.hasPaid
+      return res.result && res.result.hasPaid
     } catch (e) {
       return false
     }

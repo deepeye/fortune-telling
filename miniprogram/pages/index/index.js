@@ -85,6 +85,11 @@ Page({
 
       wx.hideLoading()
 
+      if (!res.result || !res.result.profile) {
+        wx.showToast({ title: '测算失败，请重试', icon: 'none' })
+        return
+      }
+
       const profile = res.result.profile
       wx.setStorageSync('baziProfile', profile)
 

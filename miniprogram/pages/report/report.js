@@ -107,7 +107,7 @@ Page({
           timeout: 60000,
         })
 
-        if (res.result.text && !res.result.error) {
+        if (res.result && res.result.text && !res.result.error) {
           return res.result.text
         }
 
@@ -134,7 +134,7 @@ Page({
         data: { dimension },
       })
 
-      return res.result.text || null
+      return (res.result && res.result.text) || null
     } catch (e) {
       return null
     }
