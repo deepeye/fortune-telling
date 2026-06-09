@@ -1,4 +1,4 @@
-const { getPrivacyPolicyContent } = require('../../utils/settings-service')
+const { getPrivacyPolicyContent } = require('../../../utils/settings-service')
 
 Page({
   data: {
