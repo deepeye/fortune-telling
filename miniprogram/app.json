@@ -4,7 +4,7 @@
     "pages/fortune/fortune",
     "pages/report/report",
     "pages/settings/settings",
-    "pages/settings/privacy"
+    "pages/settings/privacy/privacy"
   ],
   "window": {
     "navigationBarBackgroundColor": "#f5f0e8",
