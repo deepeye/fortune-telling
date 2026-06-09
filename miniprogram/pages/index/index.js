@@ -25,11 +25,11 @@ Page({
   },
 
   switchToSolar() {
-    this.setData({ calendarType: 'solar' })
+    this.setData({ calendarType: 'solar', lunarDateDisplay: '' })
   },
 
   switchToLunar() {
-    this.setData({ calendarType: 'lunar' })
+    this.setData({ calendarType: 'lunar', birthDate: '' })
   },
 
   onDateChange(e) {
@@ -37,7 +37,10 @@ Page({
   },
 
   onLunarDateChange(e) {
-    this.setData({ birthDate: e.detail.value })
+    this.setData({
+      birthDate: e.detail.value,
+      lunarDateDisplay: e.detail.value,
+    })
   },
 
   onShichenChange(e) {
